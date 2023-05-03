@@ -59,7 +59,7 @@ int TemperatureRange(float temperature){
     errorCode = ERR_TEMP_LOW;
     result = 0;
   }
-  else if (temperature < TEMP_MAX_TH)
+  else if (temperature > TEMP_MAX_TH)
   {
     errorCode = ERR_TEMP_HIGH;
     result = 0;
