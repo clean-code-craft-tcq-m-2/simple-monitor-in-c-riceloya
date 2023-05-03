@@ -5,26 +5,41 @@
 ///temperature thresholds///////
 #define TEMP_MAX_TH 45
 #define TEMP_MIN_TH 0 
+/// temp warning thresholds////
+#define TEMP_MAX_WARN_TH (TEMP_MAX_TH * 0.95f)
+#define TEMP_MIN_WARN_TH (TEMP_MAX_TH*0.05f)
 
 /// State of Charge (SOC) thresholds/////
 #define SOC_MAX_TH 80
 #define SOC_MIN_TH 20
+////SOC warning thresholds ///
+#define SOC_MAX_WAR_TH (SOC_MAX_TH*0.95f)
+#define SOC_MIN_WAR_TH ((SOC_MIN_TH)+(SOC_MAX_TH*0.95f))
 
 /// Charge rate threshold///
 #define CHARGE_MAX_DELTA 0.8f
+/// Charge rate warning threshold///
+#define CHARGE_MAX_DELTA_WAR (CHARGE_MAX_DELTA*0.95f)
 
 /////////////////ERROR DEFINITIONS////
 ///temperature////
 #define ERR_TEMP_HIGH 0x0A
 #define ERR_TEMP_LOW  0x0B
+///temperature warning error
+#define ERR_TEMP_HIGH_WAR 0x0C
+#define ERR_TEMP_LOW_WAR  0x0D
 
 ///SOC///////////////
 #define ERR_SOC_HIGH 0xA0
 #define ERR_SOC_LOW  0xB0
+///SOC warning error///
+#define ERR_SOC_HIGH_WAR 0xC0
+#define ERR_SOC_LOW_WAR  0xD0
 
 ////ChargeRate/////
 #define ERR_CHARGE_DELTA_HIGH 0xA00
-
+////ChargeRate warning///
+#define ERR_CHARGE_DELTA_HIGH_WAR 0xB00
 
 
 void ErroMessagePrinter(int errorCode, float measure_data){
@@ -36,14 +51,29 @@ void ErroMessagePrinter(int errorCode, float measure_data){
   case ERR_TEMP_LOW:
     printf("MIN TEMP BREACH: %f C", measure_data);
     break;
+  case ERR_TEMP_HIGH_WAR:
+    printf("MAX TEMP REACH WARNING: %f C", measure_data);
+    break;
+  case ERR_TEMP_LOW_WAR:
+    printf("MIN TEMP REACH WARNING: %f C", measure_data);
+    break;
   case ERR_SOC_HIGH:
     printf("MAX SOC BREACH: %f percent", measure_data);
     break;
   case ERR_SOC_LOW:
     printf("MIN SOC BREACH: %f percent", measure_data);
     break;
+  case ERR_SOC_HIGH_WAR:
+    printf("MAX SOC REACH WARNING: %f percent", measure_data);
+    break;
+  case ERR_TEMP_LOW_WAR:
+    printf("MIN SOC REACH WARNING: %f percent", measure_data);
+    break;
   case ERR_CHARGE_DELTA_HIGH:
     printf("MAX CHARGE RATE BREACH: %f Amp/sec", measure_data);
+    break;
+  case ERR_CHARGE_DELTA_HIGH_WAR:
+    printf("MAX CHARGE RATE REACH WARNING: %f Amp/sec", measure_data);
     break;
   default:
     break;
@@ -64,6 +94,17 @@ int TemperatureRange(float temperature){
     errorCode = ERR_TEMP_HIGH;
     result = 0;
   }
+  ////warning reach/// 
+  else if(temperature < TEMP_MIN_WARN_TH)
+  {
+    errorCode = ERR_TEMP_LOW_WAR;
+    result = 0;
+  }
+  else if(temperature > TEMP_MAX_WARN_TH)
+  {
+    errorCode = ERR_TEMP_HIGH_WAR;
+    result = 0;
+  }
   ErroMessagePrinter(errorCode,temperature);
   return result;
 }
@@ -80,6 +121,10 @@ int SocRange(float soc){
     errorCode = ERR_SOC_HIGH;
     result = 0;
   }
+  else if(soc < SOC_MIN_WAR_TH){
+    errorCode = ERR_SOC_LOW_WAR;
+    result = 0;
+  }
   ErroMessagePrinter(errorCode, soc);
   return  result;
 }
@@ -92,6 +137,10 @@ int ChargeRate(float chargeRate){
   {
     errorCode = ERR_CHARGE_DELTA_HIGH;
     result  = 0;
+  }
+  else if (chargeRate > CHARGE_MAX_DELTA_WAR){
+    errorCode =  ERR_CHARGE_DELTA_HIGH_WAR;
+    result = 0;
   }
   ErroMessagePrinter(errorCode,chargeRate);
   return result;
