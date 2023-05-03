@@ -23,23 +23,23 @@
 
 /////////////////ERROR DEFINITIONS////
 ///temperature////
-#define ERR_TEMP_HIGH 0x0A
-#define ERR_TEMP_LOW  0x0B
+#define ERR_TEMP_HIGH 0x01
+#define ERR_TEMP_LOW  0x02
 ///temperature warning error
-#define ERR_TEMP_HIGH_WAR 0x0C
-#define ERR_TEMP_LOW_WAR  0x0D
+#define ERR_TEMP_HIGH_WAR 0x03
+#define ERR_TEMP_LOW_WAR  0x04
 
 ///SOC///////////////
-#define ERR_SOC_HIGH 0xA0
-#define ERR_SOC_LOW  0xB0
+#define ERR_SOC_HIGH 0x10
+#define ERR_SOC_LOW  0x20
 ///SOC warning error///
-#define ERR_SOC_HIGH_WAR 0xC0
-#define ERR_SOC_LOW_WAR  0xD0
+#define ERR_SOC_HIGH_WAR 0x30
+#define ERR_SOC_LOW_WAR  0x40
 
 ////ChargeRate/////
-#define ERR_CHARGE_DELTA_HIGH 0xA00
+#define ERR_CHARGE_DELTA_HIGH 0x100
 ////ChargeRate warning///
-#define ERR_CHARGE_DELTA_HIGH_WAR 0xB00
+#define ERR_CHARGE_DELTA_HIGH_WAR 0x200
 
 
 void ErroMessagePrinter(int errorCode, float measure_data){
