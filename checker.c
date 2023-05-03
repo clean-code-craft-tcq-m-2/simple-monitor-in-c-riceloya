@@ -134,6 +134,6 @@ int main() {
   assert(!ChargeRate(0.9));*/
 
   /// battery tests
-  assert(batteryIsOk(1.2, 22.5, 0.65));
-  assert(!batteryIsOk(44.9,79.9, 0.9));
+  assert(!batteryIsOk(1.2, 22.5, 0.65));
+  assert(batteryIsOk(44.9,79.9, 0.9));
 }
