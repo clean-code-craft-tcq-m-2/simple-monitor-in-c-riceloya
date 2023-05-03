@@ -94,7 +94,7 @@ int ChargeRate(float chargeRate){
     result  = 0;
   }
   ErroMessagePrinter(errorCode,chargeRate);
-  print result;
+  return result;
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
