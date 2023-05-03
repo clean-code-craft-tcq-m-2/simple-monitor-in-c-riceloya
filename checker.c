@@ -39,14 +39,11 @@ void ErroMessagePrinter(int errorCode, float measure_data){
   case ERR_SOC_HIGH:
     printf("MAX SOC BREACH: %f percent", measure_data);
     break;
-  case ERR_SOC_MIN:
+  case ERR_SOC_LOW:
     printf("MIN SOC BREACH: %f percent", measure_data);
     break;
   case ERR_CHARGE_DELTA_HIGH:
     printf("MAX CHARGE RATE BREACH: %f Amp/sec", measure_data);
-    break;
-  case ERR_CHARGE_DELTA_LOW:
-    printf("MIN CHARGE RATE BREACH: %f Amp/sec", measure_data);
     break;
   default:
     break;
