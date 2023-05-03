@@ -161,7 +161,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
 int main() {
   ///boundary tests for temp////
   assert(!TemperatureRange(-0.01));
-  assert(TemperatureRange(0));
+  //assert(TemperatureRange(0));
   assert(TemperatureRange(0.1));
   assert(TemperatureRange(0));
   assert(TemperatureRange(32));
