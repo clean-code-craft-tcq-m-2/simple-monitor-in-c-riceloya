@@ -66,7 +66,7 @@ void ErroMessagePrinter(int errorCode, float measure_data){
   case ERR_SOC_HIGH_WAR:
     printf("MAX SOC REACH WARNING: %f percent", measure_data);
     break;
-  case ERR_TEMP_LOW_WAR:
+  case ERR_SOC_LOW_WAR:
     printf("MIN SOC REACH WARNING: %f percent", measure_data);
     break;
   case ERR_CHARGE_DELTA_HIGH:
