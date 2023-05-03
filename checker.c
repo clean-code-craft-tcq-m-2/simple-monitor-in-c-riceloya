@@ -26,7 +26,7 @@ int ChrgRt(chargeRate){
     printf("Charge Rate out of range!\n");
     return 0;}
   else{
-    printf("Charge Rate in range")
+    printf("Charge Rate in range");
     return 1;}
 } 
 
