@@ -16,7 +16,7 @@ int SocRange(soc){
     printf("State of Charge out of range!\n");
     return 0;}
   else{
-    printf("Soc in Range")
+    printf("Soc in Range");
     return 1;
   }
 }
