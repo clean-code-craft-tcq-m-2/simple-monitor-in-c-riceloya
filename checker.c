@@ -97,7 +97,7 @@ int ChargeRate(float chargeRate){
     result  = 0;
   }
   ErroMessagePrinter(errorCode,chargeRate);
-  print result
+  print result;
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
@@ -132,9 +132,9 @@ int main() {
   assert(!SocRange(80.1));
 
   ///boundary tests for ChargeRate ///
-  assert(ChargeRate(0.7))
-  assert(ChargeRate(0.8))
-  assert(!ChargeRate(0.9))
+  assert(ChargeRate(0.7));
+  assert(ChargeRate(0.8));
+  assert(!ChargeRate(0.9));
 
   /// battery tests
   assert(batteryIsOk(1.2, 22.5, 0.65));
