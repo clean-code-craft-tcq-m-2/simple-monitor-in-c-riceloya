@@ -30,7 +30,6 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
   TemperatureRange(temperature);
   SocRange(soc);
   ChrgRt(chargeRate);
-
   return 1;
 }
 
