@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-int TemperatureRange(temp){
+int TemperatureRange(temperature){
   if(temperature < 0 || temperature > 45) {
     printf("Temperature out of range!\n");
     break;}
