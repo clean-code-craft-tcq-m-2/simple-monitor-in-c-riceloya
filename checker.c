@@ -41,42 +41,83 @@
 ////ChargeRate warning///
 #define ERR_CHARGE_DELTA_HIGH_WAR 0x200
 
+//language definition
+ #define LANG_ENGLISH 0
+ #define LANG_DEUTSCH 1
 
+int sysLanguage =  LANG_ENGLISH
 void ErroMessagePrinter(int errorCode, float measure_data){
-  switch (errorCode)
-  {
-  case ERR_TEMP_HIGH:
-    printf("MAX TEMP BREACH: %f C", measure_data);
-    break;
-  case ERR_TEMP_LOW:
-    printf("MIN TEMP BREACH: %f C", measure_data);
-    break;
-  case ERR_TEMP_HIGH_WAR:
-    printf("MAX TEMP REACH WARNING: %f C", measure_data);
-    break;
-  case ERR_TEMP_LOW_WAR:
-    printf("MIN TEMP REACH WARNING: %f C", measure_data);
-    break;
-  case ERR_SOC_HIGH:
-    printf("MAX SOC BREACH: %f percent", measure_data);
-    break;
-  case ERR_SOC_LOW:
-    printf("MIN SOC BREACH: %f percent", measure_data);
-    break;
-  case ERR_SOC_HIGH_WAR:
-    printf("MAX SOC REACH WARNING: %f percent", measure_data);
-    break;
-  case ERR_SOC_LOW_WAR:
-    printf("MIN SOC REACH WARNING: %f percent", measure_data);
-    break;
-  case ERR_CHARGE_DELTA_HIGH:
-    printf("MAX CHARGE RATE BREACH: %f Amp/sec", measure_data);
-    break;
-  case ERR_CHARGE_DELTA_HIGH_WAR:
-    printf("MAX CHARGE RATE REACH WARNING: %f Amp/sec", measure_data);
-    break;
-  default:
-    break;
+  if(sysLanguage == LANG_ENGLISH){
+    switch (errorCode){
+      case ERR_TEMP_HIGH:
+        printf("MAX TEMP BREACH: %f C", measure_data);
+        break;
+      case ERR_TEMP_LOW:
+        printf("MIN TEMP BREACH: %f C", measure_data);
+        break;
+      case ERR_TEMP_HIGH_WAR:
+        printf("MAX TEMP REACH WARNING: %f C", measure_data);
+        break;
+      case ERR_TEMP_LOW_WAR:
+        printf("MIN TEMP REACH WARNING: %f C", measure_data);
+        break;
+      case ERR_SOC_HIGH:
+        printf("MAX SOC BREACH: %f percent", measure_data);
+        break;
+      case ERR_SOC_LOW:
+        printf("MIN SOC BREACH: %f percent", measure_data);
+        break;
+      case ERR_SOC_HIGH_WAR:
+        printf("MAX SOC REACH WARNING: %f percent", measure_data);
+        break;
+      case ERR_SOC_LOW_WAR:
+        printf("MIN SOC REACH WARNING: %f percent", measure_data);
+        break;
+      case ERR_CHARGE_DELTA_HIGH:
+        printf("MAX CHARGE RATE BREACH: %f Amp/sec", measure_data);
+        break;
+      case ERR_CHARGE_DELTA_HIGH_WAR:
+        printf("MAX CHARGE RATE REACH WARNING: %f Amp/sec", measure_data);
+        break;
+      default:
+        break;
+    }
+  }
+  else if(sysLanguage == LANG_DEUTSCH){
+    switch (errorCode){
+      case ERR_TEMP_HIGH:
+        printf("MAXIMALTEMPERATURVERLETZUNG: %f C", measure_data);
+        break;
+      case ERR_TEMP_LOW:
+        printf("MINDESTTEMPERATURVERLETZUNG: %f C", measure_data);
+        break;
+      case ERR_TEMP_HIGH_WAR:
+        printf("MAXIMALTEMPERATURWARNUNG: %f C", measure_data);
+        break;
+      case ERR_TEMP_LOW_WAR:
+        printf("MINDESTTEMPERATURWARNUNG: %f C", measure_data);
+        break;
+      case ERR_SOC_HIGH:
+        printf("MAXIMALE SOC-VERLETZUNG: %f prozent", measure_data);
+        break;
+      case ERR_SOC_LOW:
+        printf("MINIMALE SOC-VERLETZUNG: %f prozent", measure_data);
+        break;
+      case ERR_SOC_HIGH_WAR:
+        printf("MAXIMALE SOC-WARNUNG: %f prozent", measure_data);
+        break;
+      case ERR_SOC_LOW_WAR:
+        printf("MINIMALE SOC-WARNUNG: %f prozent", measure_data);
+        break;
+      case ERR_CHARGE_DELTA_HIGH:
+        printf("VERLETZUNG DER MAXIMALEN GEBÜHRENRATE: %f Amp/sek", measure_data);
+        break;
+      case ERR_CHARGE_DELTA_HIGH_WAR:
+        printf("WARNUNG MAXIMALE LADERATE REICHWEITE: %f Amp/sek", measure_data);
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -163,15 +204,17 @@ int main() {
   assert(TemperatureRange(0));
   assert(TemperatureRange(0.1));
   assert(TemperatureRange(0));
+  sysLanguage = LANG_DEUTSCH
   assert(TemperatureRange(32));
   assert(TemperatureRange(44.9));
   assert(!TemperatureRange(45.1));
-
+  sysLanguage = LANG_ENGLISH
   ///boundary tests for Soc ///
   assert(!SocRange(19.9));
   assert(SocRange(20));
   assert(SocRange(20.1));
   assert(SocRange(67.5));
+  sysLanguage = LANG_DEUTSCH
   assert(SocRange(79.9));
   assert(SocRange(80));
   assert(!SocRange(80.1));
