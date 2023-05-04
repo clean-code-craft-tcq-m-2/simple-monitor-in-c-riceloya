@@ -117,9 +117,13 @@ int SocRange(float soc){
   }
   else if(soc > SOC_MAX_TH){
     errorCode = ERR_SOC_HIGH;
+    result = 0;
   }
   else if(soc < SOC_MIN_WAR_TH){
     errorCode = ERR_SOC_LOW_WAR;
+  }
+  else if(soc < SOC_MAX_WAR_TH){
+    errorCode = ERR_SOC_HIGH_WAR;
   }
   ErroMessagePrinter(errorCode, soc);
   return  result;
