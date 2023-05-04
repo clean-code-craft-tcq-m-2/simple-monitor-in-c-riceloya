@@ -45,7 +45,8 @@
  #define LANG_ENGLISH 0
  #define LANG_DEUTSCH 1
 
-int sysLanguage =  LANG_ENGLISH
+int sysLanguage =  LANG_ENGLISH;
+
 void ErroMessagePrinter(int errorCode, float measure_data){
   if(sysLanguage == LANG_ENGLISH){
     switch (errorCode){
@@ -204,17 +205,17 @@ int main() {
   assert(TemperatureRange(0));
   assert(TemperatureRange(0.1));
   assert(TemperatureRange(0));
-  sysLanguage = LANG_DEUTSCH
+  sysLanguage = LANG_DEUTSCH;
   assert(TemperatureRange(32));
   assert(TemperatureRange(44.9));
   assert(!TemperatureRange(45.1));
-  sysLanguage = LANG_ENGLISH
+  sysLanguage = LANG_ENGLISH;
   ///boundary tests for Soc ///
   assert(!SocRange(19.9));
   assert(SocRange(20));
   assert(SocRange(20.1));
   assert(SocRange(67.5));
-  sysLanguage = LANG_DEUTSCH
+  sysLanguage = LANG_DEUTSCH;
   assert(SocRange(79.9));
   assert(SocRange(80));
   assert(!SocRange(80.1));
