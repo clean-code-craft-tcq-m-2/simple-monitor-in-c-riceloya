@@ -98,12 +98,10 @@ int TemperatureRange(float temperature){
   else if(temperature < TEMP_MIN_WARN_TH)
   {
     errorCode = ERR_TEMP_LOW_WAR;
-    result = 0;
   }
   else if(temperature > TEMP_MAX_WARN_TH)
   {
     errorCode = ERR_TEMP_HIGH_WAR;
-    result = 0;
   }
   ErroMessagePrinter(errorCode,temperature);
   return result;
@@ -119,11 +117,9 @@ int SocRange(float soc){
   }
   else if(soc > SOC_MAX_TH){
     errorCode = ERR_SOC_HIGH;
-    result = 0;
   }
   else if(soc < SOC_MIN_WAR_TH){
     errorCode = ERR_SOC_LOW_WAR;
-    result = 0;
   }
   ErroMessagePrinter(errorCode, soc);
   return  result;
@@ -140,7 +136,6 @@ int ChargeRate(float chargeRate){
   }
   else if (chargeRate > CHARGE_MAX_DELTA_WAR){
     errorCode =  ERR_CHARGE_DELTA_HIGH_WAR;
-    result = 0;
   }
   ErroMessagePrinter(errorCode,chargeRate);
   return result;
@@ -160,7 +155,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
 
 int main() {
   ///boundary tests for temp////
-  /*assert(!TemperatureRange(-0.01));
+  assert(!TemperatureRange(-0.01));
   assert(TemperatureRange(0));
   assert(TemperatureRange(0.1));
   assert(TemperatureRange(0));
@@ -180,7 +175,7 @@ int main() {
   ///boundary tests for ChargeRate ///
   assert(ChargeRate(0.7));
   assert(ChargeRate(0.8));
-  assert(!ChargeRate(0.9));*/
+  assert(!ChargeRate(0.9));
 
   /// battery tests
   assert(batteryIsOk(1.2, 22.5, 0.65));
